@@ -76,6 +76,8 @@ We will download all the raw data in a directory
 
 raw_data_dir <- "raw_data"
 
+if(!dir.exists(raw_data_dir)) dir.create(raw_data_dir)
+
 # If the raw data was not already downloaded
 if(length(dir(raw_data_dir)) == 0) {
 lapply(data_end_url, 
