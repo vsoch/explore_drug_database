@@ -56,6 +56,8 @@ bdpm <- read_tsv("raw_data/CIS_bdpm.txt",
                  col_names = columns_names,
                  locale = lcl)
 
+glimpse(bdpm)
+
 library(DT)
 
 # test the first columns
