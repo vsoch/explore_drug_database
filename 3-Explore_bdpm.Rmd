@@ -1,0 +1,102 @@
+---
+title: "Explore bdpm"
+author: "Joris Muller"
+date: "12/18/2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Aim
+
+Explore the first data set (bdpm)
+
+# Globaly
+
+```{r}
+library(dplyr)
+db <- readRDS("raw_rds/bdpm.rds")
+glimpse(db)
+```
+
+# By variable
+
+# code_cis
+
+The *Code CIS* (Code identifiant spécialité).
+
+Is there any duplicated value of this code ?
+
+```{r}
+any(duplicated(db$code_cis))
+```
+
+What's the range of this code ?
+
+```{r}
+range(db$code_cis)
+```
+
+# denomination
+
+```{r}
+head(db$denomination)
+```
+
+Is there some very popular drugs names I know
+
+```{r}
+grep("Doliprane", ignore.case = T, db$denomination, value = T)
+```
+
+I didn't image that there is so much kind of "Doliprane"
+
+```{r}
+amox <- grep("amoxicilline", ignore.case = T, db$denomination)
+length(amox)
+head(db$denomination[amox])
+```
+
+There is a lot of form of this antibiotic (152). Normal for one of the most used antibiotic.
+
+# forme
+
+```{r}
+uforme <- unique(db$forme)
+length(uforme)
+```
+
+
+405 various form. But there is multiple form in one line sometimes, separated by "et". Try to find the real different form.
+
+```{r}
+forms <- db$forme %>%
+  strsplit(split = " et ") %>%
+  unlist() 
+  
+length(unique(forms))  
+head(forms)
+
+
+
+```
+
+Select the 100 most frequent
+
+```{r}
+head(as.data.frame(table(forms)))
+cent <- forms %>%
+  table() %>%
+  as.data.frame %>%
+  arrange(desc(Freq)) %>%
+  head(100)
+```
+
+
+```{r, cache=T}
+library(wordcloud2)
+wordcloud2(cent)
+```
+
