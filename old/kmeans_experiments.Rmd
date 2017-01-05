@@ -1,0 +1,31 @@
+---
+title: "k-means Experiment"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Aim
+
+Make some clustering on the database using kmeans
+
+# Implementation
+
+Import the only database I imported properly.
+
+```{r}
+db <- readRDS(file = "raw_rds/bdpm.rds")
+```
+
+Find some numerical variables
+
+```{r}
+str(db)
+```
+
+Not any usable in this database. Let's try another one.
+
+In fact, after reading the data decription, there is almmost no numeric data. This dataset is not a good candidate for kmeans experiments.
+
