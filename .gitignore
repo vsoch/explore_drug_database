@@ -8,3 +8,5 @@ raw_rds
 *_cache
 *_files
 *.html
+*.md
+*.js
