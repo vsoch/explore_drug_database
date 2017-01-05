@@ -1,0 +1,16 @@
+---
+title: "k-means Experiment"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Aim
+
+Make some clustering on the database using kmeans
+
+# Implementation
+
+
