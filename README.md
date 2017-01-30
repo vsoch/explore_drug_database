@@ -16,16 +16,27 @@ For the complete list of dependencies, see the [Dockerfile](Dockerfile).
 # Run using Docker
 A [demo](https://vsoch.github.io/explore_drug_database/demo/) is included. First, you should [install Docker](https://docs.docker.com/engine/installation/). You can use the Docker image served on Docker Hub simply by doing:
 
-     docker run vanessa/explore-drug-database
+     docker run -t --name explore-drug-database vanessa/explore-drug-database
 
-We would want a more elegant way to stop the container (other than killing the terminal and then doing `docker ps` to get the id and stop it) but this is the quick and dirty demo for now, because I want to go to sleep :)
+You will want to use the `-t` argument to ensure that any kill signals (eg, Control C) to stop the server are sent to the container. The `--name` argument will make it easy to stop and remove the container:
 
-It will tell you the address to open in your browser, and the port when the reports finish. Note that since you are just running the container, it will all go away when you stop it. If you want to build the container yourself:
+        docker stop explore-drug-database
+        docker rm explore-drug-database
+
+Otherwise, you will need to find the id for your container with `docker ps` and then replace the name above with that id.
+
+Running the container, after the content builds, will tell you the address to open in your browser. What you will see happen is a redirect to port `9999` on that address. This is a simple and stupid strategy, actually. The web content is being served by python's [Simple http server](https://docs.python.org/2/library/simplehttpserver.html), and a page to redirect to this address is written on the fly in [run.sh](run.sh). If you want to build the container yourself:
 
      docker build -t vanessa/explore-drug-database .
 
+or run with an interactive shell into it, to poke around:
 
-# Steps to Run Locally
+     docker run -it vanessa/explore-drug-database bash
+
+There are many ways to skin a cat, and there are many ways to deploy static web content via a container. This is just one!
+
+
+# General steps for R analysis
 
 1. Import the data
 2. Save as Rda

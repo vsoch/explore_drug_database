@@ -34,4 +34,4 @@ RUN mkdir /data
 ADD . /code
 RUN chmod u+x /code/*
 WORKDIR /code
-ENTRYPOINT /code/run.sh
+CMD /code/run.sh

@@ -9,7 +9,21 @@ echo "RUNNING ANALYSIS..."
 service nginx start
 cd /code/reports
 echo "PREPARING HTML RESULTS..."
-/usr/bin/python /code/functions/make_html.py /code/reports
+
+# [command] output directory | template directory
+/usr/bin/python /code/functions/make_html.py /code/reports /code/templates
 IPADDRESS=$(awk 'END{print $1}' /etc/hosts)
-echo "Open browser to $IPADDRESS:9999"
-/usr/bin/python -m  SimpleHTTPServer 9999
+
+# Create a redirect page in html root
+cat << EOF > /var/www/html/index.html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0;URL='http://$IPADDRESS:9999'" />    
+</head>
+</html>
+EOF
+
+echo "Open browser to $IPADDRESS, and press CTRL+C to stop."
+python -m SimpleHTTPServer 9999
