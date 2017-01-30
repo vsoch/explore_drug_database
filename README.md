@@ -14,7 +14,7 @@ On this project, I only want to explore this database and produce some markdown 
 For the complete list of dependencies, see the [Dockerfile](Dockerfile).
 
 # Run using Docker
-A [demo](https://vsoch.github.io/explore_drug_database/demo) is included. First, you should [install Docker](https://docs.docker.com/engine/installation/). You can use the Docker image served on Docker Hub simply by doing:
+A [demo](https://vsoch.github.io/explore_drug_database/demo/) is included. First, you should [install Docker](https://docs.docker.com/engine/installation/). You can use the Docker image served on Docker Hub simply by doing:
 
      docker run vanessa/explore-drug-database
 
