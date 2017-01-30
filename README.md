@@ -16,7 +16,7 @@ For the complete list of dependencies, see the [Dockerfile](Dockerfile).
 # Run using Docker
 A [demo](https://vsoch.github.io/explore_drug_database/demo/) is included. First, you should [install Docker](https://docs.docker.com/engine/installation/). You can use the Docker image served on Docker Hub simply by doing:
 
-     docker run -t --name explore-drug-database vanessa/explore-drug-database
+     docker run -t --name explore_drug_database vanessa/explore_drug_database
 
 You will want to use the `-t` argument to ensure that any kill signals (eg, Control C) to stop the server are sent to the container. The `--name` argument will make it easy to stop and remove the container:
 
@@ -27,11 +27,11 @@ Otherwise, you will need to find the id for your container with `docker ps` and 
 
 Running the container, after the content builds, will tell you the address to open in your browser. What you will see happen is a redirect to port `9999` on that address. This is a simple and stupid strategy, actually. The web content is being served by python's [Simple http server](https://docs.python.org/2/library/simplehttpserver.html), and a page to redirect to this address is written on the fly in [run.sh](run.sh). If you want to build the container yourself:
 
-     docker build -t vanessa/explore-drug-database .
+     docker build -t vanessa/explore_drug_database .
 
 or run with an interactive shell into it, to poke around:
 
-     docker run -it vanessa/explore-drug-database bash
+     docker run -it vanessa/explore_drug_database bash
 
 There are many ways to skin a cat, and there are many ways to deploy static web content via a container. This is just one!
 
