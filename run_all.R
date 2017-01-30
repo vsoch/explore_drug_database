@@ -1,6 +1,4 @@
 # Run all
-source("rscripts/make_reports.R")
-
 source("functions/make_reports.R")
 default_open_file <- TRUE
 

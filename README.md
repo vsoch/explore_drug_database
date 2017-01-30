@@ -11,7 +11,21 @@ On this project, I only want to explore this database and produce some markdown 
 - [ggplot2](https://github.com/tidyverse/ggplot2)
 - [rmarkdown](https://github.com/rstudio/rmarkdown)
 
-# Steps
+For the complete list of dependencies, see the [Dockerfile](Dockerfile).
+
+# Run using Docker
+First, you should [install Docker](https://docs.docker.com/engine/installation/). You can use the Docker image served on Docker Hub simply by doing:
+
+     docker run vanessa/explore-drug-database
+
+We would want a more elegant way to stop the container (other than killing the terminal and then doing `docker ps` to get the id and stop it) but this is the quick and dirty demo for now, because I want to go to sleep :)
+
+It will tell you the address to open in your browser, and the port when the reports finish. Note that since you are just running the container, it will all go away when you stop it. If you want to build the container yourself:
+
+     docker build -t vanessa/explore-drug-database .
+
+
+# Steps to Run Locally
 
 1. Import the data
 2. Save as Rda
