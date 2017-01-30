@@ -1,0 +1,102 @@
+---
+title: "Download the files"
+author: "Joris Muller"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(echo = TRUE)
+opts_knit$set(root.dir = '../.')
+```
+
+# Aim
+
+Download the files
+
+# Description
+
+All the data files and the description file are available on [http://base-donnees-publique.medicaments.gouv.fr/telechargement.php](http://base-donnees-publique.medicaments.gouv.fr/telechargement.php).
+
+Data files are *.txt*
+
+Description file is *.pdf*
+
+I will use `httr` to download all of them.
+
+# Implementation
+
+```{r}
+url <- "http://base-donnees-publique.medicaments.gouv.fr/telechargement.php"
+```
+
+Get the page
+
+```{r}
+library(rvest)
+library(XML)
+page <- read_html(url)
+```
+
+Databases URL could be find with files ending by .txt.
+
+These url are in link in a list (*ul*)
+
+```{r}
+dl_end_url <- page %>%
+  html_nodes("#container ul a") %>%
+  html_attr("href")
+
+dl_end_url
+```
+
+We don't want to download the documentation for the moment
+
+```{r}
+# avoid the PDF
+data_end_url <- dl_end_url[-grep("pdf", dl_end_url)]
+```
+
+To get the download URL, just paste the base url. 
+
+```{r}
+full_url <- function(endurl, base = url) {
+  paste0(base, endurl)
+}
+
+filename <- function(endurl) {
+  gsub("\\?fichier=", "", x= endurl)
+}
+
+```
+
+We will download all the raw data in a directory
+
+```{r}
+
+raw_data_dir <- "raw_data"
+
+if(!dir.exists(raw_data_dir)) dir.create(raw_data_dir)
+
+# If the raw data was not already downloaded
+if(length(dir(raw_data_dir)) == 0) {
+lapply(data_end_url, 
+       function(x) 
+         download.file(
+           url = full_url(x), 
+           destfile = file.path(raw_data_dir, filename(x))
+           )
+  )
+  
+}
+```
+
+List the downloaded files 
+
+```{r}
+datafiles <- dir(raw_data_dir)
+sizes <- file.size(file.path(raw_data_dir, datafiles))
+
+kable(data.frame("File name" = datafiles, "Size (Mo)" = round(sizes / 10^6, 1), check.names = F))
+
+```

@@ -2,11 +2,9 @@
 .Rhistory
 .RData
 .Ruserdata
-raw_data
 Contenu_et*
-raw_rds
 *_cache
 *_files
-*.html
 *.md
 *.js
+posts/

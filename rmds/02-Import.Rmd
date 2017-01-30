@@ -1,0 +1,76 @@
+---
+title: "Import data"
+author: "Joris Muller"
+date: "12/18/2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+opts_knit$set(root.dir = '../.')
+```
+
+# Aim
+
+Import the data and convert them in rda files
+
+# Description
+
+Data format is describe in [this PDF](http://base-donnees-publique.medicaments.gouv.fr/docs/Contenu_et_format_des_fichiers_telechargeables_dans_la_BDM_v1.pdf).
+
+In summary :
+
+- Value are separated by tabulation
+- There is no header
+
+# Prepare readr
+
+I will import this tabular data with `readr`.
+
+First specify the locales
+
+```{r}
+library(readr)
+# Specify manually the encoding
+guess_encoding("raw_data/CIS_bdpm.txt")
+
+lcl <- locale(
+  date_names = "fr",
+  date_format = "%d/%m/%Y",
+  decimal_mark = ",",
+  encoding = "ISO-8859-1"
+  )
+```
+
+# CIS_bdpm
+
+File with the brand name of the drugs still commercialised or stoped since less 3 years ago.
+
+```{r}
+
+columns_names <- c(
+  "code_cis", "denomination", "forme", "voie", "statut_amm", 
+  "type_amm", "commercialisation", "date_amm", "statut_bdm",
+  "no_autorisation_eu", "titulaire", "surveillance_renforcee"
+)
+
+bdpm <- read_tsv("raw_data/CIS_bdpm.txt", 
+                 col_names = columns_names,
+                 locale = lcl)
+library(dplyr)
+glimpse(bdpm)
+
+library(DT)
+
+# test the first columns
+datatable(head(bdpm))
+
+rds_dir <- "raw_rds"
+if(!dir.exists(rds_dir)) dir.create(rds_dir)
+
+saveRDS(bdpm, file.path(rds_dir, "bdpm.rds"))
+```
+
+
+
+
