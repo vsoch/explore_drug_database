@@ -212,16 +212,8 @@ bdpm &lt;- read_tsv(&quot;raw_data/CIS_bdpm.txt&quot;,
 ##   titulaire = col_character(),
 ##   surveillance_renforcee = col_character()
 ## )</code></pre>
-<pre class="r"><code>library(dplyr)</code></pre>
-<pre><code>## 
-## Attaching package: 'dplyr'</code></pre>
-<pre><code>## The following objects are masked from 'package:stats':
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code>glimpse(bdpm)</code></pre>
+<pre class="r"><code>library(dplyr)
+glimpse(bdpm)</code></pre>
 <pre><code>## Observations: 14,297
 ## Variables: 12
 ## $ code_cis               &lt;int&gt; 61266250, 62869109, 66513085, 64332894,...
@@ -240,9 +232,9 @@ bdpm &lt;- read_tsv(&quot;raw_data/CIS_bdpm.txt&quot;,
 
 # test the first columns
 datatable(head(bdpm))</code></pre>
-<div id="htmlwidget-8b9c26fc407deaf66aad" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8b9c26fc407deaf66aad">{"x":{"filter":"none","data":[["1","2","3","4","5","6"],[61266250,62869109,66513085,64332894,66207341,60538772],["A 313 200 000 UI POUR CENT, pommade","A 313 50 000 U.I., capsule molle","ABASAGLAR 100 unités/ml, solution injectable en cartouche","ABASAGLAR 100 unités/ml, solution injectable en stylo prérempli","ABELCET 5 mg/ml, suspension à diluer pour perfusion","ABIES CANADENSIS BOIRON, degré de dilution compris entre 2CH et 30CH ou entre 4DH et 60DH"],["pommade","capsule molle","solution injectable","solution injectable","suspension à diluer pour perfusion","poudre et pommade et comprimé et granules et solution(s)"],["cutanée","orale","sous-cutanée","sous-cutanée","intraveineuse","cutanée;orale;sublinguale"],["Autorisation active","Autorisation active","Autorisation active","Autorisation active","Autorisation active","Autorisation active"],["Procédure nationale","Procédure nationale","Procédure centralisée","Procédure centralisée","Procédure nationale","Enreg homéo (Proc. Nat.)"],["Commercialisée","Commercialisée","Commercialisée","Commercialisée","Commercialisée","Commercialisée"],["1998-03-12","1997-07-07","2014-09-09","2014-09-09","1997-06-10","2013-09-20"],[null,null,null,null,null,null],[null,null,"EU/1/14/944","EU/1/14/944",null,null],["PHARMA DEVELOPPEMENT","PHARMA DEVELOPPEMENT","ELI LILLY REGIONAL OPERATIONS (AUTRICHE)","ELI LILLY REGIONAL OPERATIONS (AUTRICHE)","ACINO FRANCE","BOIRON"],["Non","Non","Oui","Oui","Non","Non"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> \u003c/th>\n      <th>code_cis\u003c/th>\n      <th>denomination\u003c/th>\n      <th>forme\u003c/th>\n      <th>voie\u003c/th>\n      <th>statut_amm\u003c/th>\n      <th>type_amm\u003c/th>\n      <th>commercialisation\u003c/th>\n      <th>date_amm\u003c/th>\n      <th>statut_bdm\u003c/th>\n      <th>no_autorisation_eu\u003c/th>\n      <th>titulaire\u003c/th>\n      <th>surveillance_renforcee\u003c/th>\n    \u003c/tr>\n  \u003c/thead>\n\u003c/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-<pre class="r"><code>rds_dir &lt;- &quot;raw_rds&quot;
+<div id="htmlwidget-1f223adcb8141b3090af" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1f223adcb8141b3090af">{"x":{"filter":"none","data":[["1","2","3","4","5","6"],[61266250,62869109,66513085,64332894,66207341,60538772],["A 313 200 000 UI POUR CENT, pommade","A 313 50 000 U.I., capsule molle","ABASAGLAR 100 unités/ml, solution injectable en cartouche","ABASAGLAR 100 unités/ml, solution injectable en stylo prérempli","ABELCET 5 mg/ml, suspension à diluer pour perfusion","ABIES CANADENSIS BOIRON, degré de dilution compris entre 2CH et 30CH ou entre 4DH et 60DH"],["pommade","capsule molle","solution injectable","solution injectable","suspension à diluer pour perfusion","poudre et pommade et comprimé et granules et solution(s)"],["cutanée","orale","sous-cutanée","sous-cutanée","intraveineuse","cutanée;orale;sublinguale"],["Autorisation active","Autorisation active","Autorisation active","Autorisation active","Autorisation active","Autorisation active"],["Procédure nationale","Procédure nationale","Procédure centralisée","Procédure centralisée","Procédure nationale","Enreg homéo (Proc. Nat.)"],["Commercialisée","Commercialisée","Commercialisée","Commercialisée","Commercialisée","Commercialisée"],["1998-03-12","1997-07-07","2014-09-09","2014-09-09","1997-06-10","2013-09-20"],[null,null,null,null,null,null],[null,null,"EU/1/14/944","EU/1/14/944",null,null],["PHARMA DEVELOPPEMENT","PHARMA DEVELOPPEMENT","ELI LILLY REGIONAL OPERATIONS (AUTRICHE)","ELI LILLY REGIONAL OPERATIONS (AUTRICHE)","ACINO FRANCE","BOIRON"],["Non","Non","Oui","Oui","Non","Non"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> \u003c/th>\n      <th>code_cis\u003c/th>\n      <th>denomination\u003c/th>\n      <th>forme\u003c/th>\n      <th>voie\u003c/th>\n      <th>statut_amm\u003c/th>\n      <th>type_amm\u003c/th>\n      <th>commercialisation\u003c/th>\n      <th>date_amm\u003c/th>\n      <th>statut_bdm\u003c/th>\n      <th>no_autorisation_eu\u003c/th>\n      <th>titulaire\u003c/th>\n      <th>surveillance_renforcee\u003c/th>\n    \u003c/tr>\n  \u003c/thead>\n\u003c/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>rds_dir &lt;- &quot;produced_data&quot;
 if(!dir.exists(rds_dir)) dir.create(rds_dir)
 
 saveRDS(bdpm, file.path(rds_dir, &quot;bdpm.rds&quot;))</code></pre>

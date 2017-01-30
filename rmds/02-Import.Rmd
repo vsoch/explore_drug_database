@@ -65,7 +65,7 @@ library(DT)
 # test the first columns
 datatable(head(bdpm))
 
-rds_dir <- "raw_rds"
+rds_dir <- "produced_data"
 if(!dir.exists(rds_dir)) dir.create(rds_dir)
 
 saveRDS(bdpm, file.path(rds_dir, "bdpm.rds"))

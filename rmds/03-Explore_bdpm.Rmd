@@ -21,7 +21,7 @@ Explore the first data set (bdpm)
 
 ```{r}
 library(dplyr)
-db <- readRDS("raw_rds/bdpm.rds")
+db <- readRDS("produced_data/bdpm.rds")
 glimpse(db)
 ```
 
